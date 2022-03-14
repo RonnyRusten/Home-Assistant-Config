@@ -1,0 +1,37 @@
+sensor:
+  - platform: integration
+    source: sensor.dishwasher_power
+    name: dishwasher_energy
+    method: left
+    unit_prefix: k
+
+  - platform: history_stats
+    name: dishwasher_runtime_today
+    entity_id: sensor.dishwasher_running
+    state: "True"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+utility_meter:
+  dishwasher_daily_energy:
+    source: sensor.dishwasher_energy
+    name: dishwasher_daily_energy
+    cycle: daily
+
+template:
+  sensor:
+    - name: dishwasher_power
+      unique_id: dishwasher_power
+      state: >-
+        {% if states('sensor.dishwasher_plug_power') | float(0) < 0 %}
+          0
+        {% else %}
+          {{ states('sensor.dishwasher_plug_power') | float(0) }}
+        {% endif %}
+      unit_of_measurement: W
+
+    - name: "Dishwasher running"
+      unique_id : "dishwasher_running"
+      state: "{{ states('sensor.dishwasher_power') | float(0) > 5 }}"
+      

@@ -1,0 +1,30 @@
+utility_meter:
+  total_hourly_energy:
+    source: sensor.energy_total
+    name: consumption current hour
+    cycle: hourly
+  
+  total_daily_energy:
+    source: sensor.energy_total
+    name: Totalt daglig
+    cycle: daily
+  
+  total_weekly_energy:
+    source: sensor.energy_total
+    name: Totalt ukentlig
+    cycle: weekly
+  
+  total_monthly_energy:
+    source: sensor.energy_total
+    name: Totalt månedlig
+    cycle: monthly
+
+  total_yearly_energy:
+    source: sensor.energy_total
+    name: Totalt årlig
+    cycle: yearly
+    
+  monthly_energy_cost:
+    source: sensor.energy_total_cost
+    name: monthly_energy_cost
+    cycle: monthly
