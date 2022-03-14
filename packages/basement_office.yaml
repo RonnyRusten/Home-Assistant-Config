@@ -1,0 +1,31 @@
+
+
+automation:
+  - id: 'basement_office_lights_on'
+    alias: '_Kjellerkontor lys på'
+    description: ''
+    trigger:
+      - platform: device
+        domain: mqtt
+        device_id: 234a0102a6da6a7d36ed31280f4e3033
+        type: click
+        subtype: 'on'
+        discovery_id: 0x804b50fffe42a567 click_on
+    action:
+      - service: light.turn_on
+        target:
+          entity_id: light.office_basement_light_window
+  - id: 'basement_office_lights_off'
+    alias: '_Kjellerkontor lys av'
+    description: ''
+    trigger:
+      - platform: device
+        domain: mqtt
+        device_id: 234a0102a6da6a7d36ed31280f4e3033
+        type: click
+        subtype: 'off'
+        discovery_id: 0x804b50fffe42a567 click_off
+    action:
+      - service: light.turn_off
+        target:
+          entity_id: light.office_basement_light_window

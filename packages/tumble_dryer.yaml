@@ -72,7 +72,7 @@ automation:
           duration: 10
           transparency: 50%
           image:
-            url: https://3ilblflnt6jgryfmgiz2slci1k8mihz0.ui.nabu.casa/local/aeg-L76685FL.png
+            url: https://3ilblflnt6jgryfmgiz2slci1k8mihz0.ui.nabu.casa/local/Bosch-WTW855R9SN.png
         message: Tørketrommelen er ferdig
     - service: notify.telia_box_stue
       data:
@@ -82,7 +82,7 @@ automation:
           duration: 10
           transparency: 50%
           image:
-            url: https://3ilblflnt6jgryfmgiz2slci1k8mihz0.ui.nabu.casa/local/aeg-L76685FL.png
+            url: https://3ilblflnt6jgryfmgiz2slci1k8mihz0.ui.nabu.casa/local/Bosch-WTW855R9SN.png
         message: Tørketrommelen er ferdig
         #title: Melding fra husets hjerne...?
     mode: single

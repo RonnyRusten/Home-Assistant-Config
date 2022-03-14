@@ -1,0 +1,65 @@
+input_boolean:
+  livingroom_lights_on:
+    name: livingroom_lights_on
+    icon: mdi:lightbulb
+
+automation:
+  - id: 'livingroom_lights'
+    alias: '_Stue lys'
+    description: ''
+    trigger:
+    - platform: device
+      domain: mqtt
+      device_id: b5445f7d007ea283de774480b121c56a
+      type: click
+      subtype: right
+      discovery_id: 0x00158d00027bd64d click_right
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.livingroom_lights_on
+                state: 'off'
+            sequence:
+              - service: light.turn_on
+                data:
+                  transition: 1
+                target:
+                  entity_id:
+                    - light.livingroom_light_cupboard
+                    - light.livingroom_light_floor_1
+                    - light.livingroom_light_floor_2
+                    - light.livingroom_light_north_east
+                    - light.livingroom_light_tv_board
+                    - light.livingroom_light_window_north_west
+                    - light.livingroom_light_window_south_1
+                    - light.livingroom_light_window_south_2
+              - service: input_boolean.turn_on
+                data: {}
+                target:
+                  entity_id: input_boolean.livingroom_light_on
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.livingroom_lights_on
+                state: 'on'
+            sequence:
+              - service: light.turn_off
+                data:
+                  transition: 1
+                target:
+                  entity_id:
+                    - light.livingroom_light_cupboard
+                    - light.livingroom_light_floor_1
+                    - light.livingroom_light_floor_2
+                    - light.livingroom_light_north_east
+                    - light.livingroom_light_tv_board
+                    - light.livingroom_light_window_north_west
+                    - light.livingroom_light_window_south_1
+                    - light.livingroom_light_window_south_2
+              - service: input_boolean.turn_off
+                data: {}
+                target:
+                  entity_id: input_boolean.livingroom_light_on
+        default: []
+    mode: single
