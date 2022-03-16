@@ -72,7 +72,7 @@ automation:
           duration: 10
           transparency: 50%
           image:
-            url: secret! tumble_dryer_image_url
+            url: !secret tumble_dryer_image_url
         message: Tørketrommelen er ferdig
     - service: notify.telia_box_stue
       data:
@@ -82,7 +82,7 @@ automation:
           duration: 10
           transparency: 50%
           image:
-            url: secret! tumble_dryer_image_url
+            url: !secret tumble_dryer_image_url
         message: Tørketrommelen er ferdig
         #title: Melding fra husets hjerne...?
     mode: single
