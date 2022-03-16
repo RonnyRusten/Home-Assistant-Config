@@ -1,0 +1,6 @@
+zone.home:
+  radius: 30
+# binary_sensor.master_bedroom_magnet_window_contact:
+#   device_class: window
+switch.master_bedroom_heater_plug:
+  device_class: outlet

@@ -1,6 +1,6 @@
 min_renovasjon:
-  street_name: "Kringlerøysa"
-  house_no: "2B"
-  street_code: "15550"
+  street_name: !secret min_renovasjon_street_name
+  house_no: !secret min_renovasjon_house_no
+  street_code: !secret min_renovasjon_street_code
   county_id: "1507"
   date_format: "%d.%m.%Y"

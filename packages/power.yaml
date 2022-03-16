@@ -39,13 +39,13 @@ script:
           entity_id: sensor.power_usage_current_hour_estimated_from_last_15_min
           above: '5'
         - condition: state
-          entity_id: climate.varmekabel_kjellergang
+          entity_id: climate.basement_hall_floor_heating
           state: 'heating'
           attribute: hvac_action
         sequence:
         - service: climate.set_temperature
           target:
-            entity_id: climate.varmekabel_kjellergang
+            entity_id: climate.basement_hall_floor_heating
           data:
             temperature: 20
       - conditions:
@@ -53,43 +53,43 @@ script:
           entity_id: sensor.power_usage_current_hour_estimated_from_last_15_min
           above: '5'
         - condition: state
-          entity_id: climate.varmekabel_kjellergang
+          entity_id: climate.basement_hall_floor_heating
           state: 'idle'
           attribute: hvac_action
         - condition: state
-          entity_id: switch.plugvarmtvannstank_on_off
+          entity_id: switch.hot_water_plug
           state: 'on'
         sequence:
         - service: switch.turn_off
           target:
-            entity_id: switch.plugvarmtvannstank_on_off
+            entity_id: switch.hot_water_plug
       - conditions:
         - condition: numeric_state
           entity_id: sensor.power_usage_current_hour_estimated_from_last_15_min
           below: '5'
         - condition: state
-          entity_id: climate.varmekabel_kjellergang
+          entity_id: climate.basement_hall_floor_heating
           state: 'idle'
           attribute: hvac_action
         - condition: state
-          entity_id: switch.plugvarmtvannstank_on_off
+          entity_id: switch.hot_water_plug
           state: 'off'
         sequence:
         - service: switch.turn_on
           target:
-            entity_id: switch.plugvarmtvannstank_on_off
+            entity_id: switch.hot_water_plug
       - conditions:
         - condition: numeric_state
           entity_id: sensor.power_usage_current_hour_estimated_from_last_15_min
           below: '5'
         - condition: state
-          entity_id: climate.varmekabel_kjellergang
+          entity_id: climate.basement_hall_floor_heating
           state: 'idle'
           attribute: hvac_action
         sequence:
         - service: climate.set_temperature
           target:
-            entity_id: climate.varmekabel_kjellergang
+            entity_id: climate.basement_hall_floor_heating
           data:
             temperature: 24
       default: []

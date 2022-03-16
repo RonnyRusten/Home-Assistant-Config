@@ -1,3 +1,30 @@
+sensor:
+  - platform: integration
+    source: sensor.basement_hall_floor_heating_electric_consumption_w
+    name: basement_hall_floor_heating_energy
+    method: left
+    unit_prefix: k
+
+  - platform: history_stats
+    name: basement_hall_floor_heating_runtime_today
+    entity_id: sensor.basement_hall_floor_heating_running
+    state: "True"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+template:
+  sensor:
+  - name: "basement_hall_floor_heating_running"
+    unique_id : "basement_hall_floor_heating_running"
+    state: "{{ is_state_attr('climate.basement_hall_floor_heating', 'hvac_action', 'heating') }}"
+
+utility_meter:
+  basement_hall_floor_heating_daily_energy:
+    source: sensor.basement_hall_floor_heating_energy
+    name: basement_hall_floor_heating_daily_energy
+    cycle: daily
+
 automation:
   - id: 'hall_basement_light_on'
     alias: _Kjellergang - Automatisk lys på

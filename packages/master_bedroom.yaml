@@ -71,7 +71,7 @@ automation:
         - condition: time
           after: '18:00:00'
           before: 06:30:00
-          weekday: []
+          #weekday: []
         sequence:
         - service: switch.turn_on
           data: {}
@@ -101,7 +101,7 @@ automation:
         - condition: time
           after: '18:00:00'
           before: '18:01:00'
-          weekday: []
+          #weekday: []
         sequence:
         - service: notify.mobile_app_kb2003
           data: 

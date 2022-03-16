@@ -53,7 +53,7 @@ automation:
         entity_id: media_player.kjellerkontoret_speaker
         message: Tørketrommelen er ferdig
         cache: true
-    - service: notify.mobile_app_kb2003
+    - service: notify.mobile_app_ronny_one
       data:
         message: Tørketrommelen er ferdig
         title: Vaskemaskin ferdig
@@ -72,7 +72,7 @@ automation:
           duration: 10
           transparency: 50%
           image:
-            url: https://3ilblflnt6jgryfmgiz2slci1k8mihz0.ui.nabu.casa/local/Bosch-WTW855R9SN.png
+            url: secret! tumble_dryer_image_url
         message: Tørketrommelen er ferdig
     - service: notify.telia_box_stue
       data:
@@ -82,7 +82,7 @@ automation:
           duration: 10
           transparency: 50%
           image:
-            url: https://3ilblflnt6jgryfmgiz2slci1k8mihz0.ui.nabu.casa/local/Bosch-WTW855R9SN.png
+            url: secret! tumble_dryer_image_url
         message: Tørketrommelen er ferdig
         #title: Melding fra husets hjerne...?
     mode: single

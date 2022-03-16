@@ -3,3 +3,4 @@ default_config:
 automation: !include ../../automations.yaml
 scene: !include ../../scenes.yaml
 script: !include ../../scripts.yaml
+#climate: !include_dir_list entities/climate/
