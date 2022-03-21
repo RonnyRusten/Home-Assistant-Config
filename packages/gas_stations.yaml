@@ -5,7 +5,7 @@
 #   @description  :   Solution to get gas prices from Drivstoffappen.  
 #   @basic concept: 
 #      Rest integration gets prices from Drivstoffappen and puts them in sensors 
-#      Templates are populating sensors with attributes for better presentation in maps.
+#      Templates are populating sensors with attributes for easier access to values.
 #      For a list of gas stations, use a tool like postman and run a query on the api with the apropriate headers.
 #      Link to postman collection:
 #      https://github.com/RonnyRusten/Home-Assistant-Config/blob/master/other/Drivstoffappen.postman_collection.json
