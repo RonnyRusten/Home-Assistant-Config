@@ -2,6 +2,7 @@ sensor:
   - platform: integration
     source: sensor.master_bedroom_heater_power
     name: master_bedroom_energy
+    round: 2
     method: left
     unit_prefix: k
 

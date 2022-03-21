@@ -3,6 +3,7 @@ sensor:
   - platform: integration
     source: sensor.hot_water_power
     name: hot_water_energy
+    round: 2
     method: left
     unit_prefix: k
 

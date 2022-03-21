@@ -2,12 +2,14 @@ sensor:
   - platform: integration
     source: sensor.fridge_basement_power
     name: fridge_basement_energy
+    round: 2
     method: left
     unit_prefix: k
 
   - platform: integration
     source: sensor.fridge_kitchen_power
     name: fridge_kitchen_energy
+    round: 2
     method: left
     unit_prefix: k
 

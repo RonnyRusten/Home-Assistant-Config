@@ -2,6 +2,7 @@ sensor:
   - platform: integration
     source: sensor.air_condition_power
     name: air_condition_energy
+    round: 2
     unit_prefix: k
 
   - platform: history_stats

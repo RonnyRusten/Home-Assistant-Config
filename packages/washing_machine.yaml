@@ -3,6 +3,7 @@ sensor:
   - platform: integration
     source: sensor.washing_machine_power
     name: washing_machine_energy
+    round: 2
     method: left
     unit_prefix: k
 

@@ -3,6 +3,7 @@ sensor:
   - platform: integration
     source: sensor.tumble_dryer_power
     name: tumble_dryer_energy
+    round: 2
     method: left
     unit_prefix: k
 

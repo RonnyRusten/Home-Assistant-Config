@@ -2,6 +2,7 @@ sensor:
   - platform: integration
     source: sensor.basement_hall_floor_heating_electric_consumption_w
     name: basement_hall_floor_heating_energy
+    round: 2
     method: left
     unit_prefix: k
 

@@ -1,7 +1,9 @@
+
 sensor:
   - platform: integration
     source: sensor.dishwasher_power
     name: dishwasher_energy
+    round: 2
     method: left
     unit_prefix: k
 

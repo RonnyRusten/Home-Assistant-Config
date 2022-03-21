@@ -2,6 +2,8 @@ sensor:
   - platform: integration
     source: sensor.freezer_power
     name: freezer_energy
+    round: 2
+    method: left
     unit_prefix: k
 
   - platform: history_stats
