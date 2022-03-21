@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "2830260a-7aab-466a-b706-3fd6f12ab2d9",
+		"name": "Drivstoffappen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.drivstoffappen.no/api/stations?stationType=0&countryCode=NO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "x-api-key",
+						"value": "2CD114509703F6E0A976C32FCB79C4F62966EEC6",
+						"type": "default"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Drivstoffappen/1.3.8 (com.raskebiler.drivstoff.appen; build:130; iOS 15.2.1) Alamofire/5.4.4",
+						"type": "default"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "nb-NO;q=1.0, en-GB;q=0.9",
+						"type": "default"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "br;q=1.0, gzip;q=0.9, deflate;q=0.8",
+						"type": "default"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://api.drivstoffappen.no/api/stations?stationType=0&countryCode=NO",
+					"protocol": "https",
+					"host": [
+						"api",
+						"drivstoffappen",
+						"no"
+					],
+					"path": [
+						"api",
+						"stations"
+					],
+					"query": [
+						{
+							"key": "stationType",
+							"value": "0"
+						},
+						{
+							"key": "countryCode",
+							"value": "NO"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
