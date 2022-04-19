@@ -129,12 +129,12 @@ sensor:
     queries:
       - name: power_usage_last_quarter
         query: "select round((max(state)-min(state)),4) as state 
-        from states 
-        where state like '%.%' and entity_id like 'sensor.energy_total' 
-        and created > datetime('now','-15 minutes') 
-        and rowid > (select max(rowid)-10000 from states) 
-        and strftime('%Y-%m-%d', created) like (select strftime('%Y-%m-%d', created) 
-        from states where rowid = (select max(rowid) from states));"
+                from states 
+                where state like '%.%' and entity_id like 'sensor.energy_total' 
+                and last_changed > datetime('now','-15 minutes') 
+                and rowid > (select max(rowid)-10000 from states) 
+                and strftime('%Y-%m-%d', last_changed) like (select strftime('%Y-%m-%d', last_changed) 
+                from states where rowid = (select max(rowid) from states));"
         column: "state"
         value_template: "{{ value | urlencode }}"
         unit_of_measurement: 'kWh'
