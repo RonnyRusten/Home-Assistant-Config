@@ -125,15 +125,15 @@ sensor:
     method: left
     unit_prefix: k
 
-  - platform: sql
+  - platform: sql #https://data.home-assistant.io/docs/states/#database
     queries:
       - name: power_usage_last_quarter
         query: "select round((max(state)-min(state)),4) as state 
                 from states 
                 where state like '%.%' and entity_id like 'sensor.energy_total' 
-                and last_changed > datetime('now','-15 minutes') 
+                and last_updated > datetime('now','-15 minutes') 
                 and rowid > (select max(rowid)-10000 from states) 
-                and strftime('%Y-%m-%d', last_changed) like (select strftime('%Y-%m-%d', last_changed) 
+                and strftime('%Y-%m-%d', last_updated) like (select strftime('%Y-%m-%d', last_updated) 
                 from states where rowid = (select max(rowid) from states));"
         column: "state"
         value_template: "{{ value | urlencode }}"
