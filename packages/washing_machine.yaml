@@ -63,13 +63,19 @@ automation:
           data:
             ttl: 0
             priority: high
-      - service: notify.mobile_app_iphone_ingeborg
-        data:
-          message: Vaskemaskinen er ferdig
-          title: The computer says
-          data:
-            ttl: 0
-            priority: high
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: person.ingeborg
+            state: home
+        sequence:
+          - service: notify.mobile_app_iphone_ingeborg
+            data:
+              message: Vaskemaskinen er ferdig
+              title: The computer says
+              data:
+                ttl: 0
+                priority: high
       - service: notify.mobile_app_sbm_2016
         data:
           message: Vaskemaskinen er ferdig
