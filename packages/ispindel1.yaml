@@ -44,4 +44,4 @@ template:
       unique_id: 'ispindel_battery_percent'
       state: "{{ ((states('sensor.ispindel1_battery') | float(0) -3.2)*100) | round(2) }}"
       unit_of_measurement: "%"
-      icon_template: "mdi:battery"
+      icon: "mdi:battery"
