@@ -1,0 +1,143 @@
+sensor:
+  - platform: integration
+    source: sensor.master_bedroom_heater_power
+    name: master_bedroom_energy
+    unique_id: master_bedroom_energy
+    round: 2
+    method: left
+    unit_prefix: k
+
+  - platform: history_stats
+    name: master_bedroom_runtime_today
+    entity_id: sensor.master_bedroom_running
+    state: "True"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+template:
+  sensor:
+    - name: master_bedroom_heater_power
+      unique_id: master_bedroom_heater_power
+      device_class: power
+      state: >-
+        {% if states('sensor.master_bedroom_heater_plug_power') | float(0) < 0 %}
+          0
+        {% else %}
+          {{ states('sensor.master_bedroom_heater_plug_power') | float(0) }}
+        {% endif %}
+      unit_of_measurement: W
+    
+    - name: "Master bedroom heater running"
+      unique_id : "master_bedroom_heater_running"
+      state: "{{ states('sensor.master_bedroom_heater_power') | float(0) > 10 }}"
+
+utility_meter:
+  master_bedroom_daily_energy:
+    source: sensor.master_bedroom_energy
+    name: master_bedroom_daily_energy
+    unique_id: master_bedroom_daily_energy
+    cycle: daily
+
+automation:
+  - id: master_bedroom_heat
+    alias: _Soverom varme
+    description: ''
+    trigger:
+    - platform: time
+      at: '18:00'
+    - platform: state
+      entity_id: binary_sensor.master_bedroom_magnet_window_contact
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_climate_temperature
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+      below: '20'
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_climate_temperature
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+      above: '25'
+    condition: []
+    action:
+    - choose:
+      - conditions:
+        - condition: numeric_state
+          entity_id: sensor.master_bedroom_climate_temperature
+          below: '20'
+        - condition: state
+          entity_id: binary_sensor.master_bedroom_magnet_window_contact
+          state: 'off'
+        - condition: time
+          after: '18:00:00'
+          before: 06:30:00
+          #weekday: []
+        sequence:
+        - service: switch.turn_on
+          data: {}
+          target:
+            entity_id: switch.master_bedroom_heater_plug
+      - conditions:
+        - condition: or
+          conditions:
+          - condition: state
+            entity_id: binary_sensor.master_bedroom_magnet_window_contact
+            state: 'on'
+          - condition: numeric_state
+            entity_id: sensor.master_bedroom_climate_temperature
+            above: '25'
+        sequence:
+        - service: switch.turn_off
+          data: {}
+          target:
+            entity_id: switch.master_bedroom_heater_plug
+      - conditions:
+        - condition: numeric_state
+          entity_id: sensor.master_bedroom_climate_temperature
+          below: '20'
+        - condition: state
+          entity_id: binary_sensor.master_bedroom_magnet_window_contact
+          state: 'on'
+        - condition: time
+          after: '18:00:00'
+          before: '18:01:00'
+          #weekday: []
+        sequence:
+        - service: notify.mobile_app_ronny_one
+          data: 
+            message: Vinduet på soverommet er åpent. Lukk vinduet for å slå på varme.
+            title: Åpent vindu
+        # - service: notify.mobile_app_sbm_2016
+        #   data:
+        #     message: Vinduet på soverommet er åpent. Lukk vinduet for å slå på varme.
+        #     title: Åpent vindu  
+      default: []
+    mode: single
+  
+  # - id: 'master_bedroom_window_open'
+  #   alias: Soverom varsling vindu åpent
+  #   description: ''
+  #   trigger:
+  #   - platform: time
+  #     at: '18:00'
+  #   condition:
+  #   - condition: state
+  #     entity_id: binary_sensor.master_bedroom_magnet_window_contact
+  #     state: 'on'
+  #   action:
+  #   - service: notify.mobile_app_kb2003
+  #     data:
+  #       message: Vinduet på soverommet er åpent. Lukk vinduet for å slå på varme.
+  #       title: Åpent vindu
+  #       data:
+  #         ttl: 0
+  #         priority: high
+  #   - service: notify.mobile_app_sbm_2016
+  #     data:
+  #       message: Vinduet på soverommet er åpent. Lukk vinduet for å slå på varme.
+  #       title: Åpent vindu
+  #   mode: single

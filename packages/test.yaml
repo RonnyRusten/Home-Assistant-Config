@@ -1,0 +1,61 @@
+
+# switch:
+#   - platform: template
+#     switches:
+#       ovn_margrete_switch:
+#         value_template: "{{ is_state('climate.termostat_soverom_margrete', 'heat') }}"
+#         turn_on:
+#           - service: mqtt.publish
+#             data:
+#               payload: 'Turn on'
+#               topic: cmnd/rfbridge/RfCode
+
+#         turn_off:
+#           - service: mqtt.publish
+#             data:
+#               payload: 'Turn off'
+#               topic: cmnd/rfbridge/RfCode
+
+# climate:
+#   - platform: generic_thermostat
+#     name: 'Termostat Soverom Margrete'
+#     unique_id: termostat_soverom_margrete
+#     heater: input_boolean.ovn_margrete
+#     target_sensor: sensor.margrethe_temperature
+
+# input_boolean:
+#   ovn_margrete:
+#     name: Ovn Margrete
+
+# automation:
+#  - alias: Varme Margrete
+#    description: ""
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.ovn_margrete
+#    condition: []
+#    action:
+#      - choose:
+#          - conditions:
+#              - condition: state
+#                entity_id: input_boolean.ovn_margrete
+#                state: "heat"
+#            sequence:
+#              - service: mqtt.publish
+#                data:
+#                  payload: 'Turn on'
+#                  topic: cmnd/rfbridge/RfCode
+#               #  target:
+#               #    entity_id: remote.fjernkontroll_stue_remote
+#          - conditions:
+#              - condition: state
+#                entity_id: input_boolean.ovn_margrete
+#                state: "off"
+#            sequence:
+#              - service: mqtt.publish
+#                data:
+#                  payload: 'Turn on'
+#                  topic: cmnd/rfbridge/RfCode
+#               #  target:
+#               #    entity_id: remote.fjernkontroll_stue_remote
+#    mode: single
