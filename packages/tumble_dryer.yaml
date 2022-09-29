@@ -68,14 +68,14 @@ automation:
           - condition: state
             entity_id: person.ingeborg
             state: home
-        sequence:
-          - service: notify.mobile_app_iphone_ingeborg
-            data:
-              message: Tørketrommelen er ferdig
-              title: The computer says
+          sequence:
+            - service: notify.mobile_app_iphone_ingeborg
               data:
-                ttl: 0
-                priority: high
+                message: Tørketrommelen er ferdig
+                title: The computer says
+                data:
+                  ttl: 0
+                  priority: high
       - service: notify.mobile_app_sbm_2016
         data:
           message: Tørketrommelen er ferdig

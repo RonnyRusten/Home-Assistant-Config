@@ -164,7 +164,7 @@ template:
 
       - name: electricity_total_price
         unique_id: electricity_total_price
-        state: "{{ states('sensor.electricity_total_price_deal') | float(0)  +  (states('sensor.electricity_energy_cost') | float + (19.26 | float) / 100) }}"
+        state: "{{ states('sensor.electricity_total_price_deal') | float(0)  +  (states('sensor.electricity_energy_cost') | float(0) + (19.26 | float(0)) / 100) }}"
         unit_of_measurement: NOK/kWh
 
       - name: monthly_energy_cost_nok
@@ -267,3 +267,9 @@ utility_meter:
     name: Totalt daglig Nordpool
     unique_id: total_daily_cost_nordpool
     cycle: daily
+
+  total_monthly_cost_nordpool:
+    source: sensor.electricity_cost_nordpool
+    name: Totalt daglig Nordpool
+    unique_id: total_daily_cost_nordpool
+    cycle: monthly
