@@ -35,95 +35,136 @@ script:
     sequence:
       - choose:
           - conditions:
-              - condition: numeric_state
-                entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
-                above: "4.95"
-              - condition: state
-                entity_id: climate.basement_hall_floor_heating
-                state: "heating"
-                attribute: hvac_action
+            - condition: numeric_state
+              entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
+              above: "4.95"
+            - condition: state
+              entity_id: climate.basement_hall_floor_heating
+              state: "heating"
+              attribute: hvac_action
             sequence:
               - service: climate.set_temperature
                 target:
                   entity_id: climate.basement_hall_floor_heating
                 data:
-                  temperature: 20
+                  temperature: 20              
+
+          - conditions:
+            - condition: numeric_state
+              entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
+              above: "4.95"              
+            - condition: state
+              entity_id: climate.basement_hall_floor_heating
+              state: "idle"
+              attribute: hvac_action
+            - condition: state
+              entity_id: climate.bathroom_basement_temperature
+              state: "heating"
+              attribute: hvac_action
+            sequence:    
               - service: climate.set_temperature
                 target:
                   entity_id: climate.bathroom_basement_temperature
+                data:
                   temperature: 20
-              - service: climate.set_preset_mode
-                target:
-                  entity_id: climate.bedroom_ingeborg_temperature
-                data:
-                  preset_mode: away
-              - service: climate.set_preset_mode
-                target:
-                  entity_id: climate.bedroom_marius_temperature
-                data:
-                  preset_mode: away
 
           - conditions:
-              - condition: numeric_state
-                entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
-                above: "4.95"
-              - condition: state
-                entity_id: climate.basement_hall_floor_heating
-                state: "idle"
-                attribute: hvac_action
-              - condition: state
-                entity_id: switch.hot_water_plug
-                state: "on"
+            - condition: numeric_state
+              entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
+              above: "4.95"
+            - condition: state
+              entity_id: climate.basement_hall_floor_heating
+              state: "idle"
+              attribute: hvac_action
+            - condition: state
+              entity_id: climate.bathroom_basement_temperature
+              state: "idle"
+              attribute: hvac_action
+            - condition: state
+              entity_id: switch.hot_water_plug
+              state: "on"
             sequence:
               - service: switch.turn_off
                 target:
                   entity_id: switch.hot_water_plug
 
           - conditions:
-              - condition: numeric_state
-                entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
-                below: "4.95"
-              - condition: state
-                entity_id: climate.basement_hall_floor_heating
-                state: "idle"
-                attribute: hvac_action
-              - condition: state
-                entity_id: switch.hot_water_plug
-                state: "off"
+            - condition: numeric_state
+              entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
+              below: "4.95"
+            - condition: state
+              entity_id: climate.basement_hall_floor_heating
+              state: "idle"
+              attribute: hvac_action
+            - condition: state
+              entity_id: climate.bathroom_basement_temperature
+              state: "idle"
+              attribute: hvac_action
+            - condition: state
+              entity_id: switch.hot_water_plug
+              state: "off"
             sequence:
               - service: switch.turn_on
                 target:
                   entity_id: switch.hot_water_plug
 
           - conditions:
-              - condition: numeric_state
-                entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
-                below: "4.95"
-              - condition: state
-                entity_id: climate.basement_hall_floor_heating
-                state: "idle"
-                attribute: hvac_action
+            - condition: numeric_state
+              entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
+              below: "4.95"
+            - condition: state
+              entity_id: climate.basement_hall_floor_heating
+              state: "idle"
+              attribute: hvac_action
+            - condition: state
+              entity_id: climate.bathroom_basement_temperature
+              state: "idle"
+              attribute: hvac_action
+            sequence:              
+              - service: climate.set_temperature
+                target:
+                  entity_id: climate.bathroom_basement_temperature
+                data:
+                  temperature: 28
+
+          - conditions:
+            - condition: numeric_state
+              entity_id: sensor.power_usage_current_hour_estimated_from_last_10_min
+              below: "4.95"
+            - condition: state
+              entity_id: climate.basement_hall_floor_heating
+              state: "idle"
+              attribute: hvac_action
             sequence:
               - service: climate.set_temperature
                 target:
                   entity_id: climate.basement_hall_floor_heating
                 data:
                   temperature: 24
-              - service: climate.set_temperature
-                target:
-                  entity_id: climate.bathroom_basement_temperature
-                  temperature: 28
-              - service: climate.set_preset_mode
-                target:
-                  entity_id: climate.bedroom_ingeborg_temperature
-                data:
-                  preset_mode: none
-              - service: climate.set_preset_mode
-                target:
-                  entity_id: climate.bedroom_marius_temperature
-                data:
-                  preset_mode: none
+
         default: []
+
+              # - service: climate.set_preset_mode
+              #   target:
+              #     entity_id: climate.bedroom_ingeborg_temperature
+              #   data:
+              #     preset_mode: away
+              # - service: climate.set_preset_mode
+              #   target:
+              #     entity_id: climate.bedroom_marius_temperature
+              #   data:
+              #     preset_mode: away
+
+              # - service: climate.set_preset_mode
+              #   target:
+              #     entity_id: climate.bedroom_ingeborg_temperature
+              #   data:
+              #     preset_mode: none
+              # - service: climate.set_preset_mode
+              #   target:
+              #     entity_id: climate.bedroom_marius_temperature
+              #   data:
+              #     preset_mode: none
 
 sensor:
   - platform: integration

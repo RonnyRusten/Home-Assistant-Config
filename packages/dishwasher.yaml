@@ -24,7 +24,7 @@ utility_meter:
     cycle: daily
 
 template:
-  sensor:
+  - sensor:
     - name: dishwasher_power
       unique_id: dishwasher_power
       device_class: power
@@ -36,9 +36,25 @@ template:
         {% endif %}
       unit_of_measurement: W
 
-    - name: "Dishwasher running"
-      unique_id : "dishwasher_running"
-      state: "{{ states('sensor.dishwasher_power') | float(0) > 5 }}"
+  - trigger:
+    - platform: numeric_state
+      entity_id: sensor.dishwasher_power
+      above: 15
+      for: 
+        hours: 0
+        minutes: 1
+        seconds: 00
+    - platform: numeric_state
+      entity_id: sensor.dishwasher_power
+      below: 15
+      for: 
+        hours: 0
+        minutes: 1
+        seconds: 00
+    sensor:
+      - name: "Dishwasher running"
+        unique_id : "dishwasher_running"
+        state: "{{ states('sensor.dishwasher_power') | float(0) > 15 }}"    
       
 automation:
   - id: 'dishwasher_finished'
@@ -57,7 +73,7 @@ automation:
         entity_id: media_player.kjellerkontoret_speaker
         message: Oppvaskmaskinen er ferdig
         cache: true
-    - service: notify.mobile_app_kb2003 #notify.mobile_app_ronnys_iphone
+    - service: notify.mobile_app_ronny_pixel_7_pro #notify.mobile_app_ronnys_iphone
       data:
         message: Oppvaskmaskinen er ferdig
         title: The computer says
@@ -98,3 +114,13 @@ automation:
         message: Oppvaskmaskinen er ferdig
         title: The computer says
     mode: single
+
+alert:
+  dishwasher_plug_alert:
+    name: Dishwasher plug is turned off
+    done_message: Dishwasher plug is turned on
+    entity_id: switch.dishwasher_plug
+    state: "off"
+    repeat: 30
+    notifiers:
+      - mobile_app_ronny_pixel_7_pro

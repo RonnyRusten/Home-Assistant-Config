@@ -4,7 +4,7 @@ automation:
     description: ""
     trigger:
       - platform: state
-        entity_id: binary_sensor.ezviz_person_motion
+        entity_id: binary_sensor.ezviz_person_occupancy
         to: "on"
     condition: []
     action:

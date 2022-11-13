@@ -107,7 +107,7 @@ automation:
           before: '18:01:00'
           #weekday: []
         sequence:
-        - service: notify.mobile_app_ronny_one
+        - service: notify.mobile_app_ronny_pixel_7_pro
           data: 
             message: Vinduet på soverommet er åpent. Lukk vinduet for å slå på varme.
             title: Åpent vindu
