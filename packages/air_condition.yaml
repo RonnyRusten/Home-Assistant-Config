@@ -15,7 +15,7 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
+  - sensor:
     - name: air_condition_power
       unique_id: air_condition_power
       state: >-

@@ -16,7 +16,7 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
+  - sensor:
     - name: basement_freezer_power
       unique_id: basement_freezer_power
       device_class: power

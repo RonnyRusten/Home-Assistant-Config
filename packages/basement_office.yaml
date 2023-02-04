@@ -11,6 +11,7 @@ automation:
       - service: light.turn_on
         target:
           entity_id: light.office_basement_light_window
+          
   - id: 'basement_office_lights_off'
     alias: '_Kjellerkontor lys av'
     description: ''

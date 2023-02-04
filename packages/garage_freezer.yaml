@@ -16,7 +16,7 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
+  - sensor:
     - name: garage_freezer_power
       unique_id: garage_freezer_power
       device_class: power

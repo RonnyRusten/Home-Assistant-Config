@@ -16,10 +16,10 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
-  - name: "basement_hall_floor_heating_running"
-    unique_id : "basement_hall_floor_heating_running"
-    state: "{{ is_state_attr('climate.basement_hall_floor_heating', 'hvac_action', 'heating') }}"
+  - sensor:
+    - name: "basement_hall_floor_heating_running"
+      unique_id : "basement_hall_floor_heating_running"
+      state: "{{ is_state_attr('climate.basement_hall_floor_heating', 'hvac_action', 'heating') }}"
 
 utility_meter:
   basement_hall_floor_heating_daily_energy:

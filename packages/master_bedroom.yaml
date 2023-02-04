@@ -8,15 +8,29 @@ sensor:
     unit_prefix: k
 
   - platform: history_stats
-    name: master_bedroom_runtime_today
-    entity_id: sensor.master_bedroom_running
+    name: master_bedroom_heater_runtime_today
+    entity_id: sensor.master_bedroom_heater_running
     state: "True"
     type: time
     start: "{{ now().replace(hour=0, minute=0, second=0) }}"
     end: "{{ now() }}"
 
+climate:
+  - platform: generic_thermostat
+    name: Master Bedroom Temperature
+    unique_id: master_bedroom_temperature
+    max_temp: 30
+    #target_temp: 23
+    cold_tolerance: 0.5
+    hot_tolerance: 0.1
+    sleep_temp: 10
+    comfort_temp: 25
+    away_temp: 19
+    heater: switch.master_bedroom_heater_plug
+    target_sensor: sensor.master_bedroom_climate_temperature    
+
 template:
-  sensor:
+  - sensor:
     - name: master_bedroom_heater_power
       unique_id: master_bedroom_heater_power
       device_class: power
@@ -77,10 +91,15 @@ automation:
           before: 06:30:00
           #weekday: []
         sequence:
-        - service: switch.turn_on
-          data: {}
+        # - service: switch.turn_on
+        #   data: {}
+        #   target:
+        #     entity_id: switch.master_bedroom_heater_plug
+        - service: climate.set_temperature
           target:
-            entity_id: switch.master_bedroom_heater_plug
+            entity_id: climate.master_bedroom_temperature
+          data:
+            temperature: 21
       - conditions:
         - condition: or
           conditions:
@@ -91,10 +110,15 @@ automation:
             entity_id: sensor.master_bedroom_climate_temperature
             above: '25'
         sequence:
-        - service: switch.turn_off
-          data: {}
+        # - service: switch.turn_off
+        #   data: {}
+        #   target:
+        #     entity_id: switch.master_bedroom_heater_plug
+        - service: climate.set_temperature
           target:
-            entity_id: switch.master_bedroom_heater_plug
+            entity_id: climate.master_bedroom_temperature
+          data:
+            temperature: 1
       - conditions:
         - condition: numeric_state
           entity_id: sensor.master_bedroom_climate_temperature

@@ -37,9 +37,9 @@ mqtt:
       unique_id: ispindel1_time
       state_topic: "brew/ferment/iSpindel/time"
       value_template: "{{ as_timestamp((value | int /1000)|timestamp_local) | timestamp_custom('%d.%m.%Y %H:%M:%S') }}"
-                
+
 template:
-  sensor:
+  - sensor:
     - name: 'iSpindel1 battery percent'
       unique_id: 'ispindel_battery_percent'
       state: "{{ ((states('sensor.ispindel1_battery') | float(0) -3.2)*100) | round(2) }}"

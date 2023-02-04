@@ -28,7 +28,7 @@ captive_portal:
     
 dallas:
   - pin: GPIO14
-    update_interval: 300s
+    # update_interval: 300s
 
 binary_sensor:
   - platform: homeassistant

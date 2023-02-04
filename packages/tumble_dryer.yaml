@@ -16,7 +16,7 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
+  - sensor:
     - name: tumble_dryer_power
       unique_id: tumble_dryer_power
       device_class: power
@@ -76,41 +76,41 @@ automation:
                 data:
                   ttl: 0
                   priority: high
-      - service: notify.mobile_app_sbm_2016
+      - service: notify.mobile_app_iphone
         data:
           message: Tørketrommelen er ferdig
           title: The computer says
-      - service: notify.telia_box_loftet
-        data:
-          data:
-            fontsize: large
-            position: bottom-right
-            duration: 10
-            transparency: 50%
-            image:
-              url: !secret tumble_dryer_image_url
-          message: Tørketrommelen er ferdig
-          title: The computer says
-      - service: notify.telia_box_ingeborg
-        data:
-          data:
-            fontsize: large
-            position: bottom-right
-            duration: 10
-            transparency: 50%
-            image:
-              url: !secret tumble_dryer_image_url
-          message: Tørketrommelen er ferdig
-          title: The computer says
-      - service: notify.telia_box_stue
-        data:
-          data:
-            fontsize: large
-            position: bottom-right
-            duration: 10
-            transparency: 50%
-            image:
-              url: !secret tumble_dryer_image_url
-          message: Tørketrommelen er ferdig
-          title: The computer says
+      # - service: notify.telia_box_loftet
+      #   data:
+      #     data:
+      #       fontsize: large
+      #       position: bottom-right
+      #       duration: 10
+      #       transparency: 50%
+      #       image:
+      #         url: !secret tumble_dryer_image_url
+      #     message: Tørketrommelen er ferdig
+      #     title: The computer says
+      # - service: notify.telia_box_ingeborg
+      #   data:
+      #     data:
+      #       fontsize: large
+      #       position: bottom-right
+      #       duration: 10
+      #       transparency: 50%
+      #       image:
+      #         url: !secret tumble_dryer_image_url
+      #     message: Tørketrommelen er ferdig
+      #     title: The computer says
+      # - service: notify.telia_box_stue
+      #   data:
+      #     data:
+      #       fontsize: large
+      #       position: bottom-right
+      #       duration: 10
+      #       transparency: 50%
+      #       image:
+      #         url: !secret tumble_dryer_image_url
+      #     message: Tørketrommelen er ferdig
+      #     title: The computer says
     mode: single

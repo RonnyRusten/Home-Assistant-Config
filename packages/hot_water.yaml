@@ -17,7 +17,7 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
+  - sensor:
     - name: hot_water_power
       unique_id: hot_water_power
       device_class: power

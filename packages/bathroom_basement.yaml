@@ -1,11 +1,11 @@
 climate:
   - platform: generic_thermostat
     name: Bathroom Basement Temperature
-    unique_id: bathromm_basement_temperature
+    unique_id: bathroom_basement_temperature
     max_temp: 35
     #target_temp: 23
-    cold_tolerance: 0.2
-    hot_tolerance: 0.2
+    cold_tolerance: 0.1
+    hot_tolerance: 0.1
     sleep_temp: 10
     comfort_temp: 28
     away_temp: 21
@@ -30,7 +30,7 @@ sensor:
     end: "{{ now() }}"
 
 template:
-  sensor:
+  - sensor:
     - name: "Bathroom basement floor heating running"
       unique_id: bathroom_basement_floor_heating_running
       state: "{{ states('sensor.bathroom_basement_floor_heating_power_1') | float(0) > 10 }}"
